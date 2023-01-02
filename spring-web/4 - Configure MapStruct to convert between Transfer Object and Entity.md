@@ -52,6 +52,7 @@ and use that mapper to return Todo model from an hibernate entity
 
 ```kotlin
     override fun addTodo(todo: Todo): Todo {
+        val entity = mapper.modelEntity(todo)
     
         return mapper.entityModel(entity)
     }

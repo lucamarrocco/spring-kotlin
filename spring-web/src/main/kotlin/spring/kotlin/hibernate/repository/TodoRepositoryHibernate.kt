@@ -21,11 +21,9 @@ class TodoRepositoryHibernate : TodoRepository {
     private lateinit var entityManager: EntityManager
 
     override fun addTodo(todo: Todo): Todo {
-        val entity = TodoEntity()
+        val entity = mapper.modelEntity(todo)
 
         entity.id = UUID.randomUUID()
-
-        entity.description = todo.description
 
         entityManager.persist(entity)
 
