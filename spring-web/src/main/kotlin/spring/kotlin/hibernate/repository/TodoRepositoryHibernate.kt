@@ -30,8 +30,6 @@ class TodoRepositoryHibernate : TodoRepository {
         return mapTodo(entity)
     }
 
-    private fun mapTodo(entity: TodoEntity) = Todo(entity.id!!, entity.description!!)
-
     override fun findTodo(todo: TodoQuery): List<Todo> {
 
         val criteriaBuilder = entityManager.criteriaBuilder
@@ -54,4 +52,6 @@ class TodoRepositoryHibernate : TodoRepository {
 
         return query.resultList.map(this::mapTodo)
     }
+
+    private fun mapTodo(entity: TodoEntity) = Todo(entity.id!!, entity.description!!)
 }
