@@ -43,7 +43,7 @@ class AppController
 ```
 
 add a method handler (function) named ```hello``` and annotate this method with ```GetMapping("/hello")``` annotation.
-The effect of this method declaration will be to expose an http handler that will return string ```Hello World!``` for 
+The effect of this method declaration will be to expose an http handler that will return string ```Hello World!``` for
 http request ```curl -X GET http://localhost:8080/hello```
 
 ```kotlin
@@ -60,8 +60,9 @@ class AppController {
 }
 ```
 
-add a request parameter ```name: String``` and annotate this parameter with ```RequestParam("name")``` annotation.
-As effect of this change a query paramter named ```name``` will be required to invoke this handler, hence http request to call this method will be ```curl -X GET http://localhost:8080/hello?name=World```
+add a request parameter ```name: String``` and annotate this parameter with ```RequestParam("name")``` annotation. As
+effect of this change a query paramter named ```name``` will be required to invoke this handler, hence http request to
+call this method will be ```curl -X GET http://localhost:8080/hello?name=World```
 
 ```kotlin
 package spring.kotlin.web
@@ -76,7 +77,6 @@ class AppController {
     fun hello(@RequestParam("name") name: String) = "Hello $name!"
 }
 ```
-
 
 ## Gradle Build
 
@@ -106,7 +106,8 @@ plugins {
 
 ### Gradle Artifact Group and Version
 
-define project group and version. I use ```spring-3.0.1-kotlin-1.7.22-SNAPSHOT``` to keep track spring and kotlin version used in this project example. You can define whatever version you wish, eg ```1.0-SNAPSHOT```
+define project group and version. I use ```spring-3.0.1-kotlin-1.7.22-SNAPSHOT``` to keep track spring and kotlin
+version used in this project example. You can define whatever version you wish, eg ```1.0-SNAPSHOT```
 
 ```kotlin
 group = "spring-kotlin-web"

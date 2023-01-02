@@ -2,18 +2,20 @@ package spring.kotlin.hibernate.repository
 
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
-import jakarta.persistence.TypedQuery
-import jakarta.persistence.criteria.CriteriaBuilder
-import jakarta.persistence.criteria.Expression
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import spring.kotlin.domain.model.Todo
 import spring.kotlin.domain.model.TodoQuery
 import spring.kotlin.domain.repository.TodoRepository
+import spring.kotlin.hibernate.entity.EntityMapper
 import spring.kotlin.hibernate.entity.TodoEntity
 import java.util.*
 
 @Repository
 class TodoRepositoryHibernate : TodoRepository {
+
+    @Autowired
+    private lateinit var mapper: EntityMapper
 
     @PersistenceContext
     private lateinit var entityManager: EntityManager
@@ -27,7 +29,7 @@ class TodoRepositoryHibernate : TodoRepository {
 
         entityManager.persist(entity)
 
-        return mapTodo(entity)
+        return mapper.entityModel(entity)
     }
 
     override fun findTodo(todo: TodoQuery): List<Todo> {
@@ -50,8 +52,6 @@ class TodoRepositoryHibernate : TodoRepository {
 
         val query = entityManager.createQuery(criteriaQuery)
 
-        return query.resultList.map(this::mapTodo)
+        return query.resultList.map(mapper::entityModel)
     }
-
-    private fun mapTodo(entity: TodoEntity) = Todo(entity.id!!, entity.description!!)
 }

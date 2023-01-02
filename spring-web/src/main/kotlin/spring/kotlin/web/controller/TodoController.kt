@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import spring.kotlin.domain.model.Todo
-import spring.kotlin.domain.repository.TodoRepository
 import spring.kotlin.domain.model.TodoQuery
+import spring.kotlin.domain.repository.TodoRepository
 
 
 @RestController

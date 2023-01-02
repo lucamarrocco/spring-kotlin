@@ -1,5 +1,4 @@
-## Setting up simple Hibernate Query Entities
-
+## Setting up simple Hibernate Query
 
 ### Add a Query model to find entities
 
@@ -23,13 +22,12 @@ interface TodoRepository {
 }
 ```
 
-
 ### Add find method in Todo repository (Hibernate)
 
 in ```TodoRepositoryHibernate.kt``` add a method to find entities using a query object
 
 ```kotlin
-class TodoRepositoryHibernate: TodoRepostiory {
+class TodoRepositoryHibernate : TodoRepostiory {
 
     override fun findTodo(todo: TodoQuery): List<Todo> {
 
@@ -62,7 +60,7 @@ in ```TodoController.kt``` add a method to find entities using a query object
 
 ```kotlin
 class TodoController {
-    
+
     @Transactional(readOnly = true)
     @GetMapping("/todo")
     fun findTodo(query: TodoQuery) = todoRepository.findTodo(query)
