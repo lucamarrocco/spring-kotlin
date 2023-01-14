@@ -1,1 +1,2 @@
-include("spring-web")
+include("todo-spring")
+include("todo-react")
