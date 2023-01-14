@@ -10,12 +10,12 @@ import org.w3c.fetch.RequestInit
 import org.w3c.fetch.RequestMode
 import kotlin.js.json
 
-class Rest(val baseUrl: String) {
+open class RestApi(val baseUrl: String) {
 
-    suspend inline fun <reified EntityType> POST(path: String, body: EntityType? = null): EntityType =
+    suspend inline fun <reified EntityType> post(path: String, body: EntityType? = null): EntityType =
         request("POST", path, body)
 
-    suspend inline fun <reified EntityType> GET(path: String, body: EntityType? = null): List<EntityType> =
+    suspend inline fun <reified EntityType> get(path: String, body: EntityType? = null): List<EntityType> =
         request("GET", path, body)
 
     suspend inline fun <reified T, reified R> request(method: String, path: String, entity: T?): R {

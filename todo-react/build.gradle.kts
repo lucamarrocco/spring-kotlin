@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "1.8.0"
 }
 
-group = "spring-web"
+group = "spring-kotlin"
 version = "kotlin-1.8.0-react-18.2.0-pre.385"
 
 repositories {
@@ -23,9 +23,13 @@ dependencies {
 }
 
 kotlin {
-    js {
+    js(IR) {
         binaries.executable()
+
         browser {
+            runTask {
+                devServer = devServer?.copy(port = 3000)
+            }
             commonWebpackConfig {
                 cssSupport {
                     enabled.set(true)

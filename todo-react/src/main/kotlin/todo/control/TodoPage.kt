@@ -1,10 +1,5 @@
-package domain.control
+package todo.control
 
-import Api.addTodo
-import Api.findTodos
-import Title
-import app.control.Dialog
-import domain.model.Todo
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -12,18 +7,19 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLFormElement
 import org.w3c.dom.HTMLInputElement
 import react.FC
+import react.Fragment
 import react.Props
-import react.ReactNode
 import react.dom.events.ChangeEventHandler
 import react.dom.events.FormEventHandler
 import react.dom.events.MouseEventHandler
-import react.dom.html.ReactHTML.fieldset
-import react.dom.html.ReactHTML.form
-import react.dom.html.ReactHTML.input
-import react.dom.html.ReactHTML.label
+import react.dom.html.ReactHTML.h1
 import react.useEffectOnce
 import react.useState
+import todo.api.TodoApi
+import todo.model.Todo
 
+
+val api = TodoApi()
 
 val mainScope = MainScope()
 
@@ -32,54 +28,36 @@ external interface TodoPageProps : Props
 val TodoPage = FC<TodoPageProps> {
 
     val (todo, setTodo) = useState(Todo())
-    val (todos, setTodos) = useState<List<Todo>>(emptyList())
-    val (isTodoFormOpen, setTodoFormOpen) = useState(false)
+    val (todos, setTodos) = useState(listOf<Todo>())
 
-
-    fun presentTodoForm() {
+    fun dismissForm() {
         setTodo(Todo())
-        setTodoFormOpen(true)
     }
 
-    fun dismissTodoForm() {
-        setTodo(Todo())
-        setTodoFormOpen(false)
-    }
-
-    fun completeTodoForm() {
+    fun completeForm() {
         if (null == todo.description) return
 
         mainScope.launch {
-            addTodo(todo)
-            setTodos(findTodos())
-            dismissTodoForm()
+            api.addTodo(todo)
+            setTodo(Todo())
+            setTodos(api.getTodos())
             window.alert("Todo saved!!")
         }
     }
 
-
-    fun updateTodos() {
+    fun fetchTodos() {
         mainScope.launch {
-            setTodos(findTodos())
+            setTodos(api.getTodos())
         }
     }
 
 
-    val handlePresentForm: MouseEventHandler<HTMLButtonElement> = {
-        presentTodoForm()
+    val handleDismissForm: ItemEventHandler<Todo> = { todo ->
+        dismissForm()
     }
 
-    val handleDismissForm: MouseEventHandler<HTMLButtonElement> = {
-        dismissTodoForm()
-    }
-
-    val handleCompleteForm: MouseEventHandler<HTMLButtonElement> = {
-        completeTodoForm()
-    }
-
-    val handleSubmitForm: FormEventHandler<HTMLFormElement> = { event ->
-        event.preventDefault()
-        completeTodoForm()
+    val handleConfirmForm: ItemEventHandler<Todo> = { todo ->
+        completeForm()
     }
 
     val handleChangeDescription: ChangeEventHandler<HTMLInputElement> = { event ->
@@ -90,40 +68,21 @@ val TodoPage = FC<TodoPageProps> {
 
 
     useEffectOnce {
-        updateTodos()
+        fetchTodos()
     }
 
+    h1 {
+        +"TODO"
+    }
 
-    Title {
-        title = "Todo"
-
-        actionLabel = "Add"
-        actionDisabled = isTodoFormOpen
-        actionHandleClick = handlePresentForm
+    TodoForm {
+        item = todo
+        onConfirm = handleConfirmForm
+        onDismiss = handleDismissForm
+        onChangeDescription = handleChangeDescription
     }
 
     TodoList {
         items = todos
-    }
-
-    Dialog {
-        open = isTodoFormOpen
-
-        onSave = handleCompleteForm
-        onCancel = handleDismissForm
-
-        body = form {
-            fieldset {
-                label {
-                    input {
-                        name = "description"
-                        value = todo.description ?: ""
-                        onChange = handleChangeDescription
-                    }
-                }
-
-            }
-            onSubmit = handleSubmitForm
-        }.unsafeCast<ReactNode>()
     }
 }

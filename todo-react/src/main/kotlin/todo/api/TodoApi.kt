@@ -1,16 +1,10 @@
 package todo.api
 
-import base.Rest
 import todo.model.Todo
 
-object Api {
+class TodoApi: RestApi("http://localhost:8080") {
 
-    private val httpClient = Rest("http://localhost:8080")
+    suspend fun getTodos(): List<Todo> = get("todo")
 
-    suspend fun addTodo(todo: Todo): Todo =
-        httpClient.POST("todo", todo)
-
-    suspend fun findTodos(): List<Todo> =
-        httpClient.GET("todo")
-
+    suspend fun addTodo(todo: Todo): Todo = post("todo", todo)
 }

@@ -9,7 +9,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
 }
 
-group = "spring-web"
+group = "spring-kotlin"
 version = "kotlin-1.8.0-spring-boot-3.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
