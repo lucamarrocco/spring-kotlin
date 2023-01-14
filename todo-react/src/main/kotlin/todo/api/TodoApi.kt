@@ -1,6 +1,6 @@
 package todo.api
 
-import todo.model.Todo
+import todo.domain.model.Todo
 
 class TodoApi: RestApi("http://localhost:8080") {
 

@@ -2,9 +2,10 @@ package todo.api
 
 import kotlinx.browser.window
 import kotlinx.coroutines.await
-import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromDynamic
 import org.w3c.fetch.CORS
 import org.w3c.fetch.RequestInit
 import org.w3c.fetch.RequestMode
@@ -18,8 +19,9 @@ open class RestApi(val baseUrl: String) {
     suspend inline fun <reified EntityType> get(path: String, body: EntityType? = null): List<EntityType> =
         request("GET", path, body)
 
-    suspend inline fun <reified T, reified R> request(method: String, path: String, entity: T?): R {
-        val response = window
+    @OptIn(ExperimentalSerializationApi::class)
+    suspend inline fun <reified T, reified R> request(method: String, path: String, entity: T?): R  =
+        Json.decodeFromDynamic(window
             .fetch(
                 "$baseUrl/$path",
                 RequestInit(
@@ -30,8 +32,6 @@ open class RestApi(val baseUrl: String) {
                 )
             )
             .await()
-            .text()
-            .await()
-        return Json.decodeFromString(response)
-    }
+            .json()
+            .await())
 }

@@ -7,7 +7,7 @@ import react.dom.events.ChangeEventHandler
 import react.dom.html.ReactHTML.button
 import react.dom.html.ReactHTML.form
 import react.dom.html.ReactHTML.input
-import todo.model.Todo
+import todo.domain.model.Todo
 
 typealias ItemEventHandler<T> = (item: T) -> Unit
 typealias DismissEventHandler<T> = ItemEventHandler<T>
@@ -28,7 +28,7 @@ val TodoForm = FC<TodoFormProps> { props ->
         input {
             autoFocus = true
             name = "description"
-            value = props.item.description ?: ""
+            value = props.item.description
             onChange = props.onChangeDescription
         }
 
