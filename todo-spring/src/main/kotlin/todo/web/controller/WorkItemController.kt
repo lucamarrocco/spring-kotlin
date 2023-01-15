@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import todo.domain.model.Todo
-import todo.domain.model.TodoQuery
-import todo.domain.repository.TodoRepository
+import todo.domain.model.WorkItem
+import todo.domain.model.WorkItemQuery
+import todo.domain.repository.WorkItemRepository
 
 
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
-class TodoController {
+class WorkItemController {
 
     @Autowired
-    private lateinit var todoRepository: TodoRepository
+    private lateinit var workItemRepository: WorkItemRepository
 
     @Transactional
-    @PostMapping("/todo", consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun createTodo(@RequestBody todo: Todo) = todoRepository.addTodo(todo)
+    @PostMapping("/work-item", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    fun createWorkItem(@RequestBody workItem: WorkItem) = workItemRepository.save(workItem)
 
     @Transactional(readOnly = true)
-    @GetMapping("/todo")
-    fun findTodo(query: TodoQuery) = todoRepository.findTodo(query)
+    @GetMapping("/work-item")
+    fun findWorkItems(query: WorkItemQuery) = workItemRepository.find(query)
 }

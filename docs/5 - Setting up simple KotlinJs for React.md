@@ -245,7 +245,6 @@ val TodoForm = FC<TodoFormProps> { props ->
 }
 ```
 
-
 ### Create a React component to display a Todo page
 
 ```kotlin

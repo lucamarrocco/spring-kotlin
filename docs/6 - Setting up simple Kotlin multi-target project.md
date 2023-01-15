@@ -116,11 +116,13 @@ modules.
 There are three very simple steps for this:
 
 1. add ```library``` in gradle multi module setup. Change root ```setting.gradle.kts``` in this way:
+
 ```kotlin
 include("library")
 include("todo-react")
 include("todo-spring")
 ```
+
 as effect of this, gradle will include ```library``` module in build
 
 2. add ```library``` in other required ```build.gradle.kts```:

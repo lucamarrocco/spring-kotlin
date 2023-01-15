@@ -8,19 +8,23 @@ import org.springframework.lang.NonNull
 import java.time.LocalDateTime
 import java.util.*
 
-@Table(name = "TODO")
-@Entity(name = "Todo")
-class TodoEntity {
+@Table(name = "`USER`")
+@Entity(name = "User")
+class UserEntity {
 
     @Id
-    @Column(name = "TODO_ID", nullable = false, updatable = false)
+    @Column(name = "USER_ID", nullable = false, updatable = false)
     var id: UUID? = null
-
-    @NonNull
-    @Column(name = "DESCRIPTION", nullable = false, updatable = false)
-    var description: String? = null
 
     @NonNull
     @Column(name = "CREATED", nullable = false, updatable = false)
     var created: LocalDateTime? = null
+
+    @NonNull
+    @Column(name = "UPDATED", nullable = false, updatable = false)
+    var updated: LocalDateTime? = null
+
+    @NonNull
+    @Column(name = "NAME", nullable = false, updatable = false)
+    var name: String? = null
 }

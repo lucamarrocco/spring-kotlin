@@ -1,0 +1,32 @@
+body  {
+    font-family: Arial, SansSerif, Verdana, serif;
+    font-size: 14px;
+}
+
+h1 {
+    margin: 0.2rem;
+    padding: 0.2rem;
+    font-size: 16px;
+}
+
+form {
+    margin: 0.2rem;
+    padding: 0.2rem;
+}
+
+ul,
+ul li {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+}
+
+ul li {
+    margin: 0.2rem;
+    padding: 0.2rem;
+}
+
+ul.list li.list-item > *:not(:first-child) {
+    margin-left: 0.4rem;
+}
