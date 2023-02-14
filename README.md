@@ -6,7 +6,7 @@ multi platform / target implementation of things that are shared across differen
 
 ## todo (product)
 project management tool to manage work items and move them througth a production pipeline
-<img width="952" alt="Screenshot 2023-01-15 at 10 51 47" src="https://user-images.githubusercontent.com/43510/212534379-04baebba-caef-4257-af15-a3574c96cf49.png">
+<img width="1792" alt="Screenshot 2023-02-14 at 08 39 25" src="https://user-images.githubusercontent.com/43510/218671523-58e2f1fa-6dd2-48ec-a5a9-bacdab0d21f0.png">
 
 ### todo-react (project)
 frontend user interface to manage work items
