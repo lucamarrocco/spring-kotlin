@@ -1,7 +1,7 @@
 # spring-kotlin (program)
 this is a demonstrative repository that include real case solution to implement a well designed program composed by multiple projects and product.
 
-## library (project)
+## todo-model (project)
 multi platform / target implementation of things that are shared across different projects, including but not limited to data models, controls, abstract functions, etc
 
 ## todo (product)
