@@ -19,31 +19,31 @@ class ProjectEntity {
     var id: UUID? = null
 
     @NonNull
-    @Column(name = "CREATED", nullable = false, updatable = false)
-    var created: LocalDateTime? = null
+    @Column(name = "CREATED_DATETIME", nullable = false, updatable = false)
+    var createdDate: LocalDateTime? = null
 
     @NonNull
-    @Column(name = "UPDATED", nullable = false, updatable = false)
-    var updated: LocalDateTime? = null
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "CREATED_BY_ID", nullable = false, updatable = false)
-    var createdBy: UserEntity? = null
+    @Column(name = "UPDATED_DATETIME", nullable = false, updatable = false)
+    var updatedDate: LocalDateTime? = null
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "UPDATED_BY_ID", nullable = false, updatable = false)
-    var updatedBy: UserEntity? = null
-
-    @NonNull
-    @Column(name = "NAME", nullable = false, updatable = false)
-    var name: String? = null
+    @JoinColumn(name = "CREATED_BY_USER_ID", nullable = false, updatable = false)
+    var createdByUser: UserEntity? = null
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false)
-    var author: UserEntity? = null
+    @JoinColumn(name = "UPDATED_BY_USER_ID", nullable = false, updatable = false)
+    var updatedByUser: UserEntity? = null
+
+    @NonNull
+    @Column(name = "TITLE", nullable = false, updatable = false)
+    var title: String? = null
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "AUTHOR_USER_ID", nullable = false, updatable = false)
+    var authorUser: UserEntity? = null
 
     @NonNull
     @Column(name = "DESCRIPTION", nullable = false, updatable = false)

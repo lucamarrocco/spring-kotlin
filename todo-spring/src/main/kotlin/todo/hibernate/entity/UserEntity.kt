@@ -18,13 +18,13 @@ class UserEntity {
 
     @NonNull
     @Column(name = "CREATED", nullable = false, updatable = false)
-    var created: LocalDateTime? = null
+    var createdDateTime: LocalDateTime? = null
 
     @NonNull
     @Column(name = "UPDATED", nullable = false, updatable = false)
-    var updated: LocalDateTime? = null
+    var updatedDateTime: LocalDateTime? = null
 
     @NonNull
-    @Column(name = "NAME", nullable = false, updatable = false)
-    var name: String? = null
+    @Column(name = "TITLE", nullable = false, updatable = false)
+    var title: String? = null
 }

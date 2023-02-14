@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import org.springframework.lang.NonNull
+import todo.domain.value.Status
 import java.time.LocalDateTime
 import java.util.*
 
@@ -21,46 +22,46 @@ class MilestoneEntity {
     var id: UUID? = null
 
     @NonNull
-    @Column(name = "CREATED", nullable = false, updatable = false)
-    var created: LocalDateTime? = null
+    @Column(name = "CREATED_DATETIME", nullable = false, updatable = false)
+    var createdDatetime: LocalDateTime? = null
 
     @NonNull
-    @Column(name = "UPDATED", nullable = false, updatable = false)
-    var updated: LocalDateTime? = null
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "CREATED_BY_ID", nullable = false, updatable = false)
-    var createdBy: UserEntity? = null
+    @Column(name = "UPDATED_DATETIME", nullable = false, updatable = false)
+    var updatedDatetime: LocalDateTime? = null
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "UPDATED_BY_ID", nullable = false, updatable = false)
-    var updatedBy: UserEntity? = null
+    @JoinColumn(name = "CREATED_BY_USER_ID", nullable = false, updatable = false)
+    var createdByUser: UserEntity? = null
 
     @NonNull
-    @Column(name = "NAME", nullable = false, updatable = false)
-    var name: String? = null
+    @ManyToOne
+    @JoinColumn(name = "UPDATED_BY_USER_ID", nullable = false, updatable = false)
+    var updatedByUser: UserEntity? = null
+
+    @NonNull
+    @Column(name = "TITLE", nullable = false, updatable = false)
+    var title: String? = null
 
     @NonNull
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false)
-    var author: UserEntity? = null
+    var authorUser: UserEntity? = null
 
     @NonNull
     @Column(name = "DESCRIPTION", nullable = false, updatable = false)
     var description: String? = null
 
     @NonNull
-    @Column(name = "START_DATE", nullable = false, updatable = false)
-    var startDate: LocalDateTime? = null
+    @Column(name = "START_DATETIME", nullable = false, updatable = false)
+    var startDateTime: LocalDateTime? = null
 
     @NonNull
-    @Column(name = "END_DATE", nullable = false, updatable = false)
-    var endDate: LocalDateTime? = null
+    @Column(name = "END_DATETIME", nullable = false, updatable = false)
+    var endDateTime: LocalDateTime? = null
 
     @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS", nullable = false, updatable = false)
-    var status: MilestoneStatus? = null
+    var status: Status? = null
 }

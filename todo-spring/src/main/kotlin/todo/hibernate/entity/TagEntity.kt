@@ -21,17 +21,17 @@ class TagEntity {
     var id: UUID? = null
 
     @NonNull
-    @Column(name = "CREATED", nullable = false, updatable = false)
-    var created: LocalDateTime? = null
+    @Column(name = "CREATED_DATETIME", nullable = false, updatable = false)
+    var createdDateTime: LocalDateTime? = null
 
     @NonNull
-    @Column(name = "UPDATED", nullable = false, updatable = false)
-    var updated: LocalDateTime? = null
+    @Column(name = "UPDATED_DATETIME", nullable = false, updatable = false)
+    var updatedDateTime: LocalDateTime? = null
 
     @NonNull
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false)
-    var author: UserEntity? = null
+    var authorUser: UserEntity? = null
 
     @NonNull
     @Column(name = "DESCRIPTION", nullable = false, updatable = false)

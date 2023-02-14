@@ -12,10 +12,10 @@ import jakarta.persistence.ManyToMany
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import org.springframework.lang.NonNull
-import todo.domain.model.Difficulty
-import todo.domain.model.Stage
-import todo.domain.model.Status
-import todo.domain.model.Value
+import todo.domain.value.Difficulty
+import todo.domain.value.State
+import todo.domain.value.Status
+import todo.domain.value.Value
 import java.time.LocalDateTime
 import java.util.*
 
@@ -28,49 +28,47 @@ class WorkItemEntity {
     var id: UUID? = null
 
     @NonNull
-    @Column(name = "CREATED", nullable = false, updatable = false)
-    var created: LocalDateTime? = LocalDateTime.now()
+    @Column(name = "CREATED_DATETIME", nullable = false, updatable = false)
+    var createdDateTime: LocalDateTime? = LocalDateTime.now()
 
     @NonNull
-    @Column(name = "UPDATED", nullable = false, updatable = false)
-    var updated: LocalDateTime? = LocalDateTime.now()
+    @Column(name = "UPDATED_DATETIME", nullable = false, updatable = false)
+    var updatedDateTime: LocalDateTime? = LocalDateTime.now()
 
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "CREATED_BY_ID", nullable = true, updatable = false)
-    var createdBy: UserEntity? = null
+    @JoinColumn(name = "CREATED_BY_USER_ID", nullable = true, updatable = false)
+    var createdByUser: UserEntity? = null
 
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "UPDATED_BY_ID", nullable = true, updatable = false)
-    var updatedBy: UserEntity? = null
+    @JoinColumn(name = "UPDATED_BY_USER_ID", nullable = true, updatable = false)
+    var updatedByUser: UserEntity? = null
 
     @NonNull
-    @Column(name = "VERSION", nullable = true, updatable = false)
-    var version: Int? = null
+    @Column(name = "VERSION", nullable = false, updatable = false)
+    var version: Int = 0
 
     @ManyToOne
     @JoinColumn(name = "PREVIOUS_VERSION_ID", nullable = true, updatable = false)
     var previousVersion: WorkItemEntity? = null
 
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "AUTHOR_ID", nullable = true, updatable = false)
-    var author: UserEntity? = null
+    @JoinColumn(name = "AUTHOR_USER_ID", nullable = true, updatable = false)
+    var authorUser: UserEntity? = null
 
     @ManyToOne
-    @JoinColumn(name = "ASSIGNEE_ID", nullable = true, updatable = false)
-    var assignee: UserEntity? = null
+    @JoinColumn(name = "ASSIGNEE_USER_ID", nullable = true, updatable = false)
+    var assigneeUser: UserEntity? = null
 
     @NonNull
     @Column(name = "TITLE", nullable = false, updatable = false)
     var title: String? = null
 
-    @NonNull
+    @Column(name = "NUMBER", unique = true, nullable = false, updatable = false)
+    var number: Int? = null
+
     @Column(name = "DESCRIPTION", nullable = true, updatable = false)
     var description: String? = null
 
-    @NonNull
     @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH])
     @JoinTable(
         name = "WORK_ITEM_TAG",
@@ -80,7 +78,7 @@ class WorkItemEntity {
     var tags: List<TagEntity>? = null
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS", nullable = false, updatable = false)
+    @Column(name = "STATUS", nullable = true, updatable = false)
     var status: Status? = null
 
     @Enumerated(EnumType.STRING)
@@ -92,8 +90,8 @@ class WorkItemEntity {
     var difficulty: Difficulty? = null
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STAGE", nullable = true, updatable = false)
-    var stage: Stage? = null
+    @Column(name = "STATE", nullable = true, updatable = false)
+    var state: State? = null
 
     @ManyToOne
     @JoinColumn(name = "PROJECT_ID", nullable = true, updatable = false)
